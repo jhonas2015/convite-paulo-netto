@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#081e2a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Paulo Netto • Tu és Paulo</title>
+<style>
+:root{--safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#081e2a;overscroll-behavior:none}
+body{font-family:Georgia,"Times New Roman",serif;color:#fff;touch-action:manipulation}
+button,a{font:inherit}.screen{position:fixed;inset:0;width:100%;height:100dvh;overflow:hidden}.hidden{display:none!important}
+.cover{background:#102f43}.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% center;transform:scale(1.01)}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,27,39,.04),rgba(5,27,39,.08) 40%,rgba(5,27,39,.88) 100%)}
+.cover-content{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 20px calc(20px + var(--safe-bottom));text-align:center}
+.kicker{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;text-shadow:0 2px 8px #000;margin-bottom:7px}h1{margin:0;font-size:clamp(42px,13vw,66px);line-height:.94;text-shadow:0 3px 14px #0008}.sub{font-size:18px;margin:9px 0 18px;text-shadow:0 2px 8px #000}
+.open-btn{width:min(350px,calc(100vw - 36px));min-height:56px;padding:0 20px;border-radius:999px;border:1px solid #f5dfab;background:linear-gradient(180deg,#e1be70,#c79b4b);color:#203e4e;font-weight:bold;font-size:16px;letter-spacing:.5px;box-shadow:0 10px 28px #0006;cursor:pointer}.open-btn:active{transform:scale(.985)}
+
+/* ABERTURA — vídeo realista do envelope abrindo */
+.opening{background:#000;z-index:20;display:grid;place-items:center}
+.opening-video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center;background:#000}
+.opening:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.12));pointer-events:none}
+.opening-note{position:absolute;z-index:5;left:0;right:0;bottom:calc(7% + var(--safe-bottom));text-align:center;color:#fff;font-size:11px;letter-spacing:2.2px;text-transform:uppercase;text-shadow:0 2px 10px #000;opacity:.9}
+
+.video{background:#061c28}.video video{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:center;background:#061c28}.video:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,0) 48%,rgba(0,0,0,.76));pointer-events:none}
+.video-ui{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 18px calc(18px + var(--safe-bottom));text-align:center}.video-ui p{margin:0 0 12px;font-size:17px;text-shadow:0 2px 10px #000;line-height:1.25}.next{width:min(330px,calc(100vw - 36px));min-height:52px;border:1px solid #fff8;background:#173f52dc;color:#fff;backdrop-filter:blur(8px);border-radius:999px;padding:12px 24px;font-weight:bold;cursor:pointer}
+.details{background:#0b2430;color:#fff;display:block;overflow:hidden;padding:0}.final-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center}.final-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,22,30,.10) 0%,rgba(5,22,30,.02) 38%,rgba(5,22,30,.62) 100%);pointer-events:none}.final-title{position:absolute;z-index:3;top:calc(3.5% + var(--safe-top));left:5%;right:5%;text-align:center;font-family:Georgia,"Times New Roman",serif;font-size:clamp(34px,10vw,56px);font-weight:bold;letter-spacing:2px;text-shadow:0 3px 14px #000b;color:#fff}.final-subtitle{position:absolute;z-index:3;left:5%;right:5%;bottom:calc(3.5% + var(--safe-bottom));text-align:center;font-size:clamp(15px,4.3vw,21px);line-height:1.25;font-weight:bold;text-shadow:0 2px 10px #000;color:#fff}.final-card{position:absolute;z-index:4;right:4.5%;top:19%;width:min(45%,230px);max-height:58%;overflow:auto;background:rgba(255,252,241,.94);color:#244958;border:1px solid rgba(255,255,255,.75);border-radius:20px;padding:15px 12px;box-shadow:0 14px 45px rgba(0,0,0,.34);text-align:center;backdrop-filter:blur(5px)}.final-card-kicker{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#8a6b36;margin-bottom:7px}.final-date{font-size:14px;font-weight:bold;line-height:1.25;margin-bottom:8px}.final-row{font-size:12px;line-height:1.45;margin:3px 0}.final-card .actions{display:grid;gap:7px;margin-top:11px}.final-card .action{min-height:39px;font-size:11px;border-radius:999px;padding:7px 8px}.final-card .verse{font-size:9.5px;line-height:1.35;color:#687d80;margin:10px 0 0}.actions{display:grid;gap:9px}.action{display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:999px;border:1px solid #9bb2ac;background:#214f66;color:#fff;text-decoration:none;cursor:pointer}.action.gold{background:#d0a95e;color:#213e4d;border-color:#e5cb92;font-weight:bold}.verse{font-size:12.5px;line-height:1.5;color:#687d80;margin:16px 0 0}
+@media (max-height:650px){.cover-content{padding-bottom:calc(12px + var(--safe-bottom))}.sub{margin:6px 0 10px}.open-btn{min-height:50px}.envelope-stage{height:72vh}.card{padding:18px}.card .date{margin:10px 0;padding:10px}.verse{margin-top:10px}}
+.important{margin:14px auto 0;max-width:520px;padding:11px 14px;border:1px solid rgba(255,255,255,.28);border-radius:12px;background:rgba(8,30,42,.72);color:#fff;text-align:center;font-size:13px;line-height:1.4;box-shadow:0 6px 18px rgba(0,0,0,.18)}.important strong{letter-spacing:.5px}
+</style>
+</head>
+<body>
+<section class="screen cover" id="cover">
+  <img src="paulo-neto-avatar.jpg" alt="Paulo Netto" fetchpriority="high">
+  <div class="cover-content"><div class="kicker">Um convite especial</div><h1>Tu és Paulo</h1><div class="sub">Meu primeiro aninho ✨</div><button class="open-btn" id="open" type="button">✉️ ABRIR CONVITE</button></div>
+</section>
+
+<section class="screen opening hidden" id="opening" aria-label="Abrindo convite">
+  <video class="opening-video" id="openingVideo" playsinline webkit-playsinline preload="auto">
+    <source src="convite-abrindo-novo.mp4" type="video/mp4">
+  </video>
+</section>
+
+<section class="screen video hidden" id="videoScreen">
+  <video id="inviteVideo" playsinline webkit-playsinline preload="none"><source src="paulo-neto-video-mobile.mp4" type="video/mp4"></video>
+  <div class="video-ui"><p>💙 Uma mensagem de Paulo Netto para você</p><button class="next" id="playFallback" type="button" style="display:none;margin-bottom:9px">▶ TOCAR VÍDEO</button><button class="next" id="skip" type="button" style="margin-bottom:9px">⏭ PULAR APRESENTAÇÃO</button><button class="next" id="next" type="button" style="display:none">CONTINUAR</button></div>
+</section>
+
+<section class="screen details hidden" id="details">
+  <img class="final-photo" src="paulo-netto-final.png" alt="Paulo Netto">
+  <div class="final-shade"></div>
+  <div class="final-title">PAULO NETTO</div>
+  <div class="final-subtitle">Com a graça de Deus vamos celebrar<br>o meu primeiro aninho</div>
+  <div class="final-card">
+    <div class="final-card-kicker">MEU PRIMEIRO ANINHO</div>
+    <div class="final-date">05 de dezembro de 2026</div>
+    <div class="final-row">⏰ <strong>20h</strong></div>
+    <div class="final-row">📍 <strong>Clube do Renato</strong></div>
+    <div class="actions">
+      <a class="action gold" href="https://www.google.com/maps/search/?api=1&query=-4.847084%2C-39.579442" target="_blank" rel="noopener">📍 COMO CHEGAR</a>
+      <a class="action" id="confirm" href="https://docs.google.com/forms/d/e/1FAIpQLSc-3Sj2rx-GfGKHiRhkNkiOsK_zOWyVl0y2Qsh77Mmh6yV2vw/viewform?usp=preview" target="_blank" rel="noopener">💬 CONFIRMAR PRESENÇA</a>
+    </div>
+    <a id="calendarDownload" href="lembrete-paulo-netto.ics" download="lembrete-paulo-netto.ics" hidden></a>
+    <div class="verse">“Vinde após mim, e eu vos farei pescadores de homens.”<br><strong>Mateus 4:19</strong></div>
+    <div class="important"><strong>⚠️ IMPORTANTE</strong><br>É indispensável confirmar sua presença. A confirmação é muito importante para a organização da festa.</div>
+  </div>
+</section>
+<script>
+const screens={cover:document.getElementById('cover'),opening:document.getElementById('opening'),video:document.getElementById('videoScreen'),details:document.getElementById('details')};
+const video=document.getElementById('inviteVideo');
+const openingVideo=document.getElementById('openingVideo');
+const fallback=document.getElementById('playFallback');
+function only(el){Object.values(screens).forEach(x=>x.classList.add('hidden'));el.classList.remove('hidden')}
+let openingFinished=false;
+let transitionStarted=false;
+function startMainVideo(){
+  if(transitionStarted) return;
+  transitionStarted=true;
+  openingFinished=true;
+  // Só troca para o vídeo principal depois que a abertura realmente terminou.
+  only(screens.video);
+  video.currentTime=0;
+  video.muted=false;
+  video.load();
+  const p=video.play();
+  if(p&&p.catch)p.catch(()=>{fallback.style.display='block'});
+}
+function openingEnded(){
+  if(openingFinished) return;
+  // Garante que chegamos ao último frame antes de fazer a transição.
+  const d=openingVideo.duration;
+  if(Number.isFinite(d) && openingVideo.currentTime < d-0.08){
+    openingVideo.currentTime=d;
+  }
+  startMainVideo();
+}
+openingVideo.addEventListener('ended',openingEnded);
+openingVideo.addEventListener('timeupdate',()=>{
+  const d=openingVideo.duration;
+  if(!openingFinished && Number.isFinite(d) && d>0 && openingVideo.currentTime >= d-0.06){
+    openingEnded();
+  }
+});
+openingVideo.addEventListener('error',()=>startMainVideo());
+openingVideo.addEventListener('pause',()=>{
+  if(!openingFinished && !openingVideo.ended && openingVideo.currentTime>0.05){
+    setTimeout(()=>{
+      if(!openingFinished && !openingVideo.ended){
+        const r=openingVideo.play();
+        if(r&&r.catch)r.catch(()=>{});
+      }
+    },80);
+  }
+});
+document.getElementById('open').addEventListener('click',()=>{
+  only(screens.opening);
+  fallback.style.display='none';
+  openingFinished=false;
+  transitionStarted=false;
+  openingVideo.currentTime=0;
+  openingVideo.muted=false;
+  const p=openingVideo.play();
+  if(p&&p.catch){p.catch(()=>{
+    // Se o navegador bloquear o áudio, o vídeo ainda pode ser reproduzido sem som.
+    openingVideo.muted=true;
+    const retry=openingVideo.play();
+    if(retry&&retry.catch)retry.catch(()=>{});
+  })}
+  // Não carrega o vídeo principal durante a abertura: isso evita disputa de reprodução.
+});
+fallback.addEventListener('click',()=>video.play().then(()=>fallback.style.display='none').catch(()=>{}));
+video.addEventListener('ended',()=>{ document.getElementById('next').style.display='block'; });
+document.getElementById('skip').addEventListener('click',()=>{ video.pause(); video.currentTime=0; document.getElementById('next').style.display='none'; only(screens.details); });
+document.getElementById('next').addEventListener('click',()=>{ if(!video.ended) return; video.pause(); only(screens.details); });
+const confirmBtn=document.getElementById('confirm');
+const calendarDownload=document.getElementById('calendarDownload');
+confirmBtn.addEventListener('click',()=>{
+  // O mesmo toque abre o formulário e prepara o lembrete de calendário.
+  // O navegador/celular pode pedir confirmação para salvar/adicionar o evento.
+  setTimeout(()=>calendarDownload.click(),120);
+});
+
+</script>
+</body></html>
